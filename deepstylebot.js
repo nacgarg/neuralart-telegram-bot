@@ -22,6 +22,9 @@ var contentRegex = /^content$/i;
 bot.onText(/^\/art(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.from.id;
 	console.log("recieved");
+	bot.sendMessage(fromId, 'Working..', {
+		reply_to_message_id: msg.message_id
+	});
 	makeImage(style, content, function (err) {
 		if (err) {
 			bot.sendMessage(fromId, JSON.stringify(err), {
