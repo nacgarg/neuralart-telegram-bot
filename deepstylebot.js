@@ -24,7 +24,7 @@ api.on('message', function(msg){
 			getImage(msg.photo[msg.photo.length-1].file_id, style, function(){ api.sendMessage({chat_id:msg.chat.id, text: "Yay! Set the style."})})
 		} 
 		if (msg.caption === "content") {
-			getImage(msg.photo[msg.photo.length-1].file_id, content, function(){ api.sendMessage({chat_id:msg.chat.id, text: "Yay! Set the content. yw maya"})})
+			getImage(msg.photo[msg.photo.length-1].file_id, content, function(){ api.sendMessage({chat_id:msg.chat.id, text: "Yay! Set the content."})})
 		}
 	}
 	if (msg.text){
@@ -35,10 +35,22 @@ api.on('message', function(msg){
 				} else {
 					api.sendPhoto({
 						chat_id:msg.chat.id,
-						caption: "Here ya go bb",
+						caption: "Output",
 						photo: "output.jpg"
 					})
 				}
+			})
+		} if (msg.text === "/style") {
+			api.sendPhoto({
+				chat_id:msg.chat.id,
+				caption: "Style",
+				photo: "style.jpg"
+			})
+		} if (msg.text === "/content") {
+			api.sendPhoto({
+				chat_id:msg.chat.id,
+				caption: "Content",
+				photo: "content.jpg"
 			})
 		}
 	}
@@ -52,12 +64,18 @@ var makeImage = function(style, content, callback) {
 			callback(err);
 		});
 	} else {
-		callback({"FRICKING AND REGULAR ERROR": "STOP SPAMMING U SKRUB"})
+		callback({"error": "currently running, please wait"})
 	}
 }
 
 var getImage = function(id, path, cb) {
 	request.get('https://api.telegram.org/bot'+tkn+'/getFile?file_id='+id, function(err, resp, body){
+		try {
+			var parsed = JSON.parse(body);
+		} catch (e) {
+			console.log('Error downloading file, trying again.')
+			getImage.apply(Array.from(arguments));
+		}
 		var filePath = JSON.parse(body).result.file_path;
 		var file = fs.createWriteStream(path)
 		var r = request('https://api.telegram.org/file/bot'+tkn+'/'+filePath).pipe(file);
