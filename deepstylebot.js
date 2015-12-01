@@ -43,6 +43,7 @@ bot.onText(/^\/art(?:@neuralart_bot)?$/i, function (msg, match) {
 bot.onText(/^\/style(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.from.id;
 	console.log("recieved");
+    console.log(__dirname + '/' + style);
 	bot.sendPhoto(fromId, __dirname + '/' + style, {
 		caption: 'Style'
 	});
