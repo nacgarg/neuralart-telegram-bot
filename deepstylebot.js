@@ -43,7 +43,7 @@ bot.onText(/^\/art(?:@neuralart_bot)?$/i, function (msg, match) {
 bot.onText(/^\/style(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.from.id;
 	console.log("recieved");
-	bot.sendPhoto(fromId, 'style.jpg', {
+	bot.sendPhoto(fromId, __dirname + style, {
 		caption: 'Style',
 		reply_to_message_id: msg.message_id
 	});
@@ -52,7 +52,7 @@ bot.onText(/^\/style(?:@neuralart_bot)?$/i, function (msg, match) {
 bot.onText(/^\/content(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.from.id;
 	console.log("recieved");
-    bot.sendPhoto(fromId, 'content.jpg', {
+    bot.sendPhoto(fromId, __dirname + content, {
 		caption: 'Content',
 		reply_to_message_id: msg.message_id
 	});
