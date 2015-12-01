@@ -1,7 +1,6 @@
 {
   "name": "neuralart-telegram-bot",
   "version": "1.0.0",
-  "description": "",
   "main": "deepstylebot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,10 @@
   "bugs": {
     "url": "https://github.com/nacgarg/neuralart-telegram-bot/issues"
   },
-  "homepage": "https://github.com/nacgarg/neuralart-telegram-bot#readme"
+  "homepage": "https://github.com/nacgarg/neuralart-telegram-bot#readme",
+  "description": "",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.17.0",
+    "request": "^2.67.0"
+  }
 }
