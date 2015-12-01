@@ -28,7 +28,8 @@ api.on('message', function(msg){
 		}
 	}
 	if (msg.text){
-		if (msg.text === "/art") {
+		if (msg.text.startsWith("/art")) {
+			api.sendMessage({chat_id:msg.chat.id, text: "Starting to generate image."});
 			makeImage(style, content, function(err){
 				if (err) {
 					api.sendMessage({chat_id: msg.chat.id, text: JSON.stringify(err)})
@@ -40,13 +41,13 @@ api.on('message', function(msg){
 					})
 				}
 			})
-		} if (msg.text === "/style") {
+		} if (msg.text.startsWith("/style")) {
 			api.sendPhoto({
 				chat_id:msg.chat.id,
 				caption: "Style",
 				photo: "style.jpg"
 			})
-		} if (msg.text === "/content") {
+		} if (msg.text.startsWith("/content")) {
 			api.sendPhoto({
 				chat_id:msg.chat.id,
 				caption: "Content",
