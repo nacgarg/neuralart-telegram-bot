@@ -44,20 +44,24 @@ bot.onText(/^\/style(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.chat.id;
 	console.log("recieved");
 	bot.sendPhoto(fromId, __dirname + '/' + style, {
-		caption: 'Style'
+		caption: 'Style',
+        reply_to_message_id: msg.message_id
 	});
 });
 bot.onText(/^\/testArt(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.chat.id;
 	console.log("recieved");
-	bot.sendMessage(fromId, "recieved");
+	bot.sendMessage(fromId, "recieved", {
+        reply_to_message_id: msg.message_id
+    });
 });
 
 bot.onText(/^\/content(?:@neuralart_bot)?$/i, function (msg, match) {
     var fromId = msg.chat.id;
 	console.log("recieved");
     bot.sendPhoto(fromId, __dirname + '/' + content, {
-		caption: 'Content'
+		caption: 'Content',
+        reply_to_message_id: msg.message_id
     });
 });
 
@@ -67,11 +71,15 @@ bot.on('message', function (msg) {
 		var fromId = msg.chat.id;
         if (styleRegex.exec(msg.caption)) {
             getImage(msg.photo[msg.photo.length - 1].file_id, style, function () {
-				bot.sendMessage(fromId, "Yay! Set the style.");
+				bot.sendMessage(fromId, "Yay! Set the style.", {
+                    reply_to_message_id: msg.message_id
+                });
             })
         } else if (contentRegex.exec(msg.caption)) {
             getImage(msg.photo[msg.photo.length - 1].file_id, content, function () {
-				bot.sendMessage(fromId, "Yay! Set the content.");
+				bot.sendMessage(fromId, "Yay! Set the content.", {
+                    reply_to_message_id: msg.message_id
+                });
             })
         }
     }
